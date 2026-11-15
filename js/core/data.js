@@ -52,6 +52,31 @@
     return String(s == null ? "" : s).normalize("NFKC").toLowerCase().replace(/\s+/g, "");
   };
 
+  /*
+   * 照片網址整理
+   * Google 雲端硬碟的「分享連結」打開是一個網頁，不是圖片，不能直接放進 <img>。
+   * 這裡把它換成 Google 提供的縮圖網址（sz=w1200 代表寬 1200px），手機上就看得到。
+   * 支援的寫法：
+   *   https://drive.google.com/file/d/檔案ID/view?usp=sharing
+   *   https://drive.google.com/open?id=檔案ID
+   *   https://drive.google.com/uc?export=view&id=檔案ID
+   * 其他網址原樣保留。回傳 null 代表格式不對。
+   */
+  B.photoURL = function (raw) {
+    const u = String(raw == null ? "" : raw).trim();
+    if (!u) return null;
+    if (/^https?:\/\/(drive|docs)\.google\.com\//i.test(u)) {
+      const m = u.match(/\/d\/([-\w]{10,})/) || u.match(/[?&]id=([-\w]{10,})/);
+      return m ? "https://drive.google.com/thumbnail?id=" + m[1] + "&sz=w1200" : null;
+    }
+    if (/^https?:\/\/\S+$/i.test(u)) return u;
+    if (/^[^\s:"'<>]+$/.test(u)) return u; // 專案裡的相對路徑，例如 photos/1.jpg
+    return null;
+  };
+
+  // 是不是 Google 雲端的連結（產生器用來給比較準的提示）
+  B.isDrive = u => /^https?:\/\/(drive|docs)\.google\.com\//i.test(String(u || "").trim());
+
   function str(v, d) { return typeof v === "string" ? v : d; }
 
   B.normalize = function (cfg) {
@@ -68,10 +93,10 @@
       from: str(cfg.from, "").trim(),
       levels,
       wish: str(cfg.wish, "生日快樂！"),
-      // 只接受 https/http 網址或相對路徑，避免奇怪的連結
+      // 只接受 https/http 網址或相對路徑；Google 雲端連結會自動轉成圖片網址
       photos: (Array.isArray(cfg.photos) ? cfg.photos : [])
-        .map(p => String(p).trim())
-        .filter(p => /^(https?:\/\/\S+|[^\s:"'<>]+)$/i.test(p))
+        .map(B.photoURL)
+        .filter(Boolean)
         .slice(0, 20)
     };
   };

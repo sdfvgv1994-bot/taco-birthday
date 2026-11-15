@@ -92,7 +92,38 @@
   photosBox.addEventListener("input", () => {
     state.photos = photosBox.value.split("\n").map(s => s.trim()).filter(Boolean);
     save();
+    clearTimeout(previewTimer);
+    previewTimer = setTimeout(renderPhotoPreview, 500);
   });
+
+  // 照片預覽：每貼一張就試著載入，打不開的當場告訴對方原因
+  let previewTimer = null;
+  function renderPhotoPreview() {
+    const box = $("photo-preview");
+    box.replaceChildren();
+    (state.photos || []).forEach((raw, i) => {
+      const url = B.photoURL(raw);
+      const status = el("span", { class: "pv-status", text: url ? "載入中…" : "✕ 網址格式不對" });
+      const item = el("div", { class: "pv-item" + (url ? "" : " bad") }, [
+        el("div", { class: "pv-thumb" }),
+        el("div", { class: "pv-info" }, [el("span", { class: "pv-no", text: `第 ${i + 1} 張` }), status])
+      ]);
+      if (url) {
+        const img = el("img", { alt: `照片 ${i + 1}`, referrerpolicy: "no-referrer" });
+        img.addEventListener("load", () => { item.classList.add("ok"); status.textContent = "✓ 可以顯示"; });
+        img.addEventListener("error", () => {
+          item.classList.add("bad");
+          status.textContent = B.isDrive(raw)
+            ? "✕ 打不開：到雲端硬碟把這張的分享改成「知道連結的任何人」"
+            : "✕ 打不開：這個網址不是圖片，或對方網站不給外連";
+        });
+        img.src = url;
+        item.firstChild.appendChild(img);
+      }
+      box.appendChild(item);
+    });
+  }
+  renderPhotoPreview();
 
   // ---------- 關卡編輯 ----------
   function input(lv, key, placeholder, opts) {
@@ -265,10 +296,13 @@
       from: String(state.from || "").trim(),
       levels,
       wish: String(state.wish || "").trim() || "生日快樂！",
-      photos: (state.photos || []).filter(p => /^https?:\/\/\S+$/i.test(p) || /^[^\s:"'<>]+$/.test(p))
+      // 存的時候就轉好，連結比較短，舊版遊戲頁也看得懂
+      photos: (state.photos || []).map(B.photoURL).filter(Boolean)
     };
     const badPhotos = (state.photos || []).length - cfg.photos.length;
-    if (badPhotos) errors.push(`有 ${badPhotos} 個照片網址格式不對（要 https:// 開頭）`);
+    if (badPhotos) errors.push(`有 ${badPhotos} 個照片網址格式不對（要 https:// 開頭，或貼 Google 雲端的分享連結）`);
+    const broken = document.querySelectorAll("#photo-preview .pv-item.bad").length;
+    if (broken && !badPhotos) errors.push(`有 ${broken} 張照片打不開，看一下照片欄下面的提示`);
     return { cfg, errors };
   }
 

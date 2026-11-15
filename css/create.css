@@ -58,3 +58,21 @@
 .foot a { color: var(--yellow); }
 .warn { color: var(--yellow); font-weight: normal; }
 .two-col { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; }
+
+/* 照片預覽 */
+.photo-preview { display: flex; flex-direction: column; gap: 8px; }
+.photo-preview:empty { display: none; }
+.pv-item { display: flex; align-items: center; gap: 10px; background: #0c1636; border: 2px solid #2c4380; padding: 6px; }
+.pv-item.ok { border-color: #4fd1a1; }
+.pv-item.bad { border-color: #ff9aa8; }
+.pv-thumb { flex: none; width: 56px; height: 56px; background: #22356b; overflow: hidden; }
+.pv-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pv-item.bad .pv-thumb img { display: none; }
+.pv-info { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 1.5; }
+.pv-no { color: var(--muted); font-size: 13px; }
+.pv-item.ok .pv-status { color: #4fd1a1; }
+.pv-item.bad .pv-status { color: #ff9aa8; }
+.howto { width: 100%; background: #0c1636; border: 2px dashed #2c4380; padding: 8px 12px; }
+.howto summary { cursor: pointer; font-size: 16px; color: var(--yellow); padding: 4px 0; }
+.howto ol { margin: 8px 0; padding-left: 22px; font-size: 15px; line-height: 1.8; }
+.howto b { color: #fff; font-weight: normal; text-decoration: underline; text-decoration-color: var(--yellow); }

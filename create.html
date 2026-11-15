@@ -48,10 +48,21 @@
 
     <section class="panel">
       <h2>④ 照片 <small>選填</small></h2>
-      <label>貼上圖片網址，一行一張
-        <textarea class="px-input" id="f-photos" rows="3" placeholder="https://..."></textarea>
+      <label>貼上照片連結，一行一張
+        <textarea class="px-input" id="f-photos" rows="3" placeholder="https://drive.google.com/file/d/..."></textarea>
       </label>
-      <p class="note">連結版只能放「網路上的圖片網址」。想放手機裡的照片，請看專案說明（README）的「放自己的照片」，fork 一份後把照片放進 photos 資料夾。</p>
+      <div id="photo-preview" class="photo-preview"></div>
+      <details class="howto" open>
+        <summary>📱 手機照片怎麼放？（用 Google 雲端硬碟，免費）</summary>
+        <ol>
+          <li>打開 <b>Google 雲端硬碟</b> App，按右下角「＋」→「上傳」，選照片</li>
+          <li>在照片旁邊按「⋮」→「分享」→「管理存取權」</li>
+          <li>「一般存取權」從「限制」改成<b>「知道連結的任何人」</b>（這步最重要，沒改對方會看不到）</li>
+          <li>按「複製連結」，貼到上面的格子，一行一張</li>
+        </ol>
+        <p class="note">貼上後下面會出現小圖，看到「✓ 可以顯示」就代表對方看得到。照片存在你自己的雲端，想收回時把照片刪掉或關掉分享就好。</p>
+      </details>
+      <p class="note">⚠ 拿到連結的人都看得到這些照片，太私密的不要放。也可以貼其他網站的圖片網址（https:// 開頭）。</p>
     </section>
 
     <section class="panel actions">

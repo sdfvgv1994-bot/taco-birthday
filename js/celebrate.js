@@ -71,7 +71,7 @@
     const { el } = B;
     const strip = el("div", { class: "photos" });
     photos.forEach((src, i) => {
-      const img = el("img", { src, alt: `照片 ${i + 1}`, loading: "lazy", decoding: "async" });
+      const img = el("img", { src, alt: `照片 ${i + 1}`, loading: "lazy", decoding: "async", referrerpolicy: "no-referrer" });
       const frame = el("figure", { class: "polaroid" }, [img]);
       frame.style.setProperty("--tilt", ((i % 2 ? 1 : -1) * (1 + Math.random() * 2.5)).toFixed(1) + "deg");
       img.addEventListener("error", () => frame.remove());
