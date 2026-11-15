@@ -115,7 +115,9 @@
           item.classList.add("bad");
           status.textContent = B.isDrive(raw)
             ? "✕ 打不開：到雲端硬碟把這張的分享改成「知道連結的任何人」"
-            : "✕ 打不開：這個網址不是圖片，或對方網站不給外連";
+            : /photos\.app\.goo\.gl|photos\.google\.com|goo\.gl/i.test(raw)
+              ? "✕ 這是「Google 相簿」的連結，不能用。請改用「Google 雲端硬碟」App 上傳後的連結（drive.google.com 開頭）"
+              : "✕ 打不開：這個網址不是圖片，或對方網站不給外連";
         });
         img.src = url;
         item.firstChild.appendChild(img);
