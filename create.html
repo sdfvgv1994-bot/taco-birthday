@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1430">
+  <title>生日大冒險產生器</title>
+  <link rel="preload" href="fonts/Cubic_11.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%81%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/create.css">
+</head>
+<body>
+  <div id="sky" aria-hidden="true"></div>
+  <main id="app" class="maker">
+    <div class="sign"><h1>生日大冒險產生器</h1></div>
+    <p class="sub">填好下面的內容，按「產生連結」，<br>把連結傳給壽星就完成了！</p>
+
+    <section class="panel">
+      <h2>① 基本資料</h2>
+      <label>主題 <small>整個遊戲的畫面和故事會跟著換</small>
+        <select class="px-input" id="f-theme"></select>
+      </label>
+      <label><span>壽星名字 <b class="req">必填</b></span>
+        <input class="px-input" id="f-name" maxlength="20" placeholder="例如：小明">
+      </label>
+      <label><span>標題 <small>留空會照主題自動取名</small></span>
+        <input class="px-input" id="f-title" maxlength="20" placeholder="例如：小明的生日夜市">
+      </label>
+      <label>你的署名
+        <input class="px-input" id="f-from" maxlength="20" placeholder="例如：你的好朋友 阿宇">
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>② 關卡</h2>
+      <p class="note">每一關是路線上的一站（夜市的攤位、外送的店家、太空的星球、手帳的一頁），對方要一站一站過，全部完成才看得到最後的祝福。<br><b class="warn">⚠ 下面先放了範例題目，記得改成你們之間的事！</b></p>
+      <div id="levels"></div>
+      <button type="button" class="px-btn wide" id="add-level">＋ 新增一關</button>
+    </section>
+
+    <section class="panel">
+      <h2>③ 生日祝福</h2>
+      <label>全部過關後，會用打字機效果一個字一個字出現
+        <textarea class="px-input" id="f-wish" rows="6" maxlength="1000"></textarea>
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>④ 照片 <small>選填</small></h2>
+      <label>貼上圖片網址，一行一張
+        <textarea class="px-input" id="f-photos" rows="3" placeholder="https://..."></textarea>
+      </label>
+      <p class="note">連結版只能放「網路上的圖片網址」。想放手機裡的照片，請看專案說明（README）的「放自己的照片」，fork 一份後把照片放進 photos 資料夾。</p>
+    </section>
+
+    <section class="panel actions">
+      <p id="errors" class="errors" role="alert"></p>
+      <button type="button" class="px-btn yellow wide big" id="make">🔗 產生連結</button>
+      <div id="result" hidden>
+        <textarea class="px-input" id="link" rows="4" readonly></textarea>
+        <div class="row">
+          <button type="button" class="px-btn green" id="copy">複製連結</button>
+          <a class="px-btn" id="preview" target="_blank" rel="noopener">▶ 先玩玩看</a>
+          <a class="px-btn line" id="line" target="_blank" rel="noopener">傳到 LINE</a>
+        </div>
+        <p class="note">⚠ 答案藏在連結裡（有編碼過，一般人看不出來），但懂程式的人還是解得開，別放太私密的東西。</p>
+      </div>
+      <details class="adv">
+        <summary>進階：匯出 config.js（fork 專案的人用）</summary>
+        <textarea class="px-input" id="config-out" rows="8" readonly></textarea>
+        <button type="button" class="px-btn" id="copy-config">複製 config.js 內容</button>
+      </details>
+      <button type="button" class="px-btn red" id="reset">清空，重新開始</button>
+    </section>
+
+    <p class="foot">開源專案 · <a href="https://github.com/sdfvgv1994-bot/taco-birthday">GitHub</a></p>
+  </main>
+
+  <script src="config.js"></script>
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/data.js"></script>
+  <script src="js/core/sprites.js"></script>
+  <!-- 主題積木：想加新主題就在這裡多載入一個 -->
+  <script src="js/themes/night.js"></script>
+  <script src="js/themes/delivery.js"></script>
+  <script src="js/themes/space.js"></script>
+  <script src="js/themes/paper.js"></script>
+  <script src="js/create.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+/* 各主題的顏色和背景。body 會被加上 theme-主題名 的 class。 */
+
+/* ---------- 夜市（預設樣子就是夜市，這裡只補發光） ---------- */
+body.theme-night .deco-a { filter: drop-shadow(0 0 8px rgba(226, 58, 58, .8)); }
+
+/* ---------- 外送：傍晚的街道 ---------- */
+body.theme-delivery {
+  --bg1: #2b1a3d; --bg2: #8a3f55; --purple: #2e8b57; --purple-hi: #e8a13a;
+  background: linear-gradient(180deg, #2b1a3d, #8a3f55 55%, #e08a4a);
+  background-attachment: fixed;
+}
+body.theme-delivery .sign { background: #ffcf4a; border-color: #1a1238; }
+body.theme-delivery .sign h1 { color: #1a1238; text-shadow: none; }
+body.theme-delivery .sign::before, body.theme-delivery .sign::after { display: none; }
+body.theme-delivery .street {
+  background:
+    repeating-linear-gradient(180deg, #ffcf4a 0 18px, transparent 18px 40px) 50% 0 / 6px 100% no-repeat,
+    #4a4f5e;
+  border-color: #c9c9c9;
+}
+body.theme-delivery .street-row::before { display: none; }
+body.theme-delivery .deco-a { animation: none; width: 26px; }
+body.theme-delivery .deco-b { width: 50px; }
+body.theme-delivery .walker { width: 44px; }
+body.theme-delivery .stamp-card { border-color: #2e8b57; }
+body.theme-delivery .stamp.on { border-color: #2e8b57; color: #2e8b57; }
+body.theme-delivery .stall.cleared .stall-flag, body.theme-delivery .clear-box, body.theme-delivery .big-clear-text { border-color: #2e8b57; color: #2e8b57; }
+body.theme-delivery .clear-title, body.theme-delivery .clear-stars { color: #2e8b57; }
+body.theme-delivery .intro-lantern, body.theme-delivery .sky-lantern { filter: drop-shadow(0 0 20px rgba(255, 207, 74, .7)); }
+body.theme-delivery .card { background: #3a2440; }
+
+/* ---------- 太空 ---------- */
+body.theme-space {
+  --bg1: #05030f; --bg2: #140a33; --purple: #4b3fd1; --purple-hi: #5ee6ff;
+  background: radial-gradient(ellipse at 30% 10%, #2a1466 0, #0a0620 55%, #05030f 100%);
+  background-attachment: fixed;
+}
+body.theme-space .sign { background: #0a0620; border-color: #5ee6ff; box-shadow: 0 0 0 var(--px) var(--ink), 0 0 18px rgba(94, 230, 255, .6); }
+body.theme-space .sign h1 { color: #5ee6ff; text-shadow: 0 0 10px rgba(94, 230, 255, .8); }
+body.theme-space .sign::before, body.theme-space .sign::after { background: #5ee6ff; box-shadow: 0 0 10px #5ee6ff; }
+body.theme-space .street {
+  background:
+    radial-gradient(circle, rgba(255,255,255,.7) 0 1px, transparent 2px) 0 0 / 46px 58px,
+    radial-gradient(circle, rgba(255,255,255,.4) 0 1px, transparent 2px) 20px 30px / 70px 74px,
+    #0a0620;
+  border-color: #3a2f8a;
+}
+body.theme-space .street-row::before {
+  top: 8px; height: 2px; background: none; filter: none; border-top: 2px dotted rgba(94, 230, 255, .45);
+}
+body.theme-space .stall.closed .stall-art { filter: brightness(.45) saturate(.2); }
+body.theme-space .stall.open .stall-art { filter: drop-shadow(0 0 14px rgba(94, 230, 255, .8)); }
+body.theme-space .stall-art { animation: float 3s ease-in-out infinite; }
+body.theme-space .stall-name { background: #5ee6ff; }
+body.theme-space .deco-a { animation: twinkle 2s steps(2) infinite; }
+body.theme-space .intro-lantern, body.theme-space .sky-lantern, body.theme-space .altar.ready .altar-art { filter: drop-shadow(0 0 22px rgba(255, 207, 74, .9)); }
+body.theme-space .stamp-card { background: #0a0620; color: #5ee6ff; border-color: #5ee6ff; }
+body.theme-space .stamp { border-color: #3a2f8a; color: #6a63b0; }
+body.theme-space .stamp.on { border-color: #ffcf4a; color: #ffcf4a; }
+body.theme-space .stall.cleared .stall-flag { background: rgba(10, 6, 32, .9); color: #ffcf4a; border-color: #ffcf4a; }
+body.theme-space .clear-box, body.theme-space .big-clear-text { background: #0a0620; border-color: #ffcf4a; color: #ffcf4a; }
+body.theme-space .clear-title, body.theme-space .clear-stars { color: #ffcf4a; }
+body.theme-space .card { background: #120a3a; }
+
+/* ---------- 手作卡片：亮色紙張 ---------- */
+body.theme-paper {
+  --bg1: #f6ecd6; --bg2: #f6ecd6; --text: #3a2a20; --muted: #8a7460; --yellow: #d6457a;
+  --purple: #6fae9a; --purple-hi: #d9c7a3; --green: #6fae9a;
+  background: #f6ecd6 repeating-linear-gradient(0deg, transparent 0 27px, rgba(120, 160, 200, .22) 27px 28px);
+  background-attachment: fixed;
+}
+body.theme-paper #sky { display: none; }
+body.theme-paper .lead { color: #3a2a20; }
+body.theme-paper .sign { background: #ff8fab; border-color: #e86a8e; box-shadow: 0 6px 0 rgba(0,0,0,.12); transform: rotate(-2deg); }
+body.theme-paper .sign h1 { color: #fff; text-shadow: 2px 2px 0 #e86a8e; }
+body.theme-paper .sign::before, body.theme-paper .sign::after { display: none; }
+body.theme-paper .card { background: #fff; border-color: #d9c7a3; box-shadow: 0 6px 0 rgba(0,0,0,.1); }
+body.theme-paper .px-btn { box-shadow: inset -4px -4px 0 rgba(0,0,0,.15), inset 4px 4px 0 rgba(255,255,255,.3), 0 0 0 3px #3a2a20, 0 5px 0 3px #3a2a20; }
+body.theme-paper .px-btn.yellow { background: #ffcf4a; }
+body.theme-paper .px-btn.small, body.theme-paper .home-btn, body.theme-paper .back-btn, body.theme-paper #mute { background: #fff; color: #3a2a20; border-color: #3a2a20; }
+body.theme-paper .choice-mark { background: #3a2a20; color: #ffcf4a; }
+body.theme-paper .street { background: #fffaf0; border: 3px solid #d9c7a3; box-shadow: 0 8px 0 rgba(0,0,0,.08); }
+body.theme-paper .street-row::before { top: 6px; height: 2px; background: none; filter: none; border-top: 2px dashed #e3d3b0; }
+body.theme-paper .street-end { border-top-color: #e3d3b0; }
+body.theme-paper .stall-name { background: #fff; box-shadow: 0 0 0 2px #3a2a20; color: #3a2a20; }
+body.theme-paper .stall.closed .stall-art { filter: grayscale(1) opacity(.35); }
+body.theme-paper .stall.closed .stall-name, body.theme-paper .altar:not(.ready) .stall-name { background: #eee3cc; color: #8a7460; box-shadow: 0 0 0 2px #b8a67a; }
+body.theme-paper .stall.open .stall-art { filter: drop-shadow(0 4px 0 rgba(0,0,0,.15)); transform: rotate(-3deg); }
+body.theme-paper .stall-flag { background: #fff; color: #8a7460; border-color: #d9c7a3; }
+body.theme-paper .stall.open .stall-flag { background: #ffcf4a; color: #3a2a20; border-color: #3a2a20; }
+body.theme-paper .altar .altar-art { filter: grayscale(1) opacity(.4); }
+body.theme-paper .altar.ready .altar-art, body.theme-paper .intro-lantern, body.theme-paper .sky-lantern { filter: drop-shadow(0 6px 0 rgba(0,0,0,.15)); }
+body.theme-paper .deco-a { animation: none; }
+body.theme-paper .stamp-card { background: #fff; border-color: #ff8fab; box-shadow: 0 4px 0 rgba(0,0,0,.1); }
+body.theme-paper .stamp.on, body.theme-paper .stall.cleared .stall-flag { color: #e8437a; border-color: #e8437a; }
+body.theme-paper .clear-box, body.theme-paper .big-clear-text { background: #fff; border-color: #e8437a; color: #e8437a; }
+body.theme-paper .clear-title, body.theme-paper .clear-stars { color: #e8437a; }
+body.theme-paper .clear-banner, body.theme-paper .big-clear { background: rgba(246, 236, 214, .75); }
+body.theme-paper .hb-name { color: #e8437a; text-shadow: 3px 3px 0 #fff; }
+body.theme-paper .wish { background: #fff; }
+
+/* 祝福卡片一律用淺色紙，字才看得清楚 */
+body .card.wish { background: #fff8e8; color: #1a1238; border-color: #1a1238; }

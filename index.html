@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b1430">
+  <meta name="description" content="生日闖關小遊戲：夜市、外送、太空、手作卡片四種主題，一站一站闖關，全部完成就能看到照片和生日祝福。">
+  <meta property="og:title" content="🎂 有人送你一個生日小遊戲">
+  <meta property="og:description" content="全部過關有驚喜喔！">
+  <title>生日大冒險</title>
+  <link rel="preload" href="fonts/Cubic_11.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%F0%9F%8E%81%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/themes.css">
+</head>
+<body>
+  <div id="sky" aria-hidden="true"></div>
+  <button id="mute" type="button" aria-label="關閉聲音">🔊</button>
+  <main id="app"></main>
+
+  <!-- 設定（沒有分享連結時使用） -->
+  <script src="config.js"></script>
+  <!-- 核心積木 -->
+  <script src="js/core/ui.js"></script>
+  <script src="js/core/audio.js"></script>
+  <script src="js/core/data.js"></script>
+  <script src="js/core/sprites.js"></script>
+  <!-- 主題積木：想加新主題就在這裡多載入一個 -->
+  <script src="js/themes/night.js"></script>
+  <script src="js/themes/delivery.js"></script>
+  <script src="js/themes/space.js"></script>
+  <script src="js/themes/paper.js"></script>
+  <!-- 關卡積木：想加新關卡類型就在這裡多載入一個 -->
+  <script src="js/levels/choice.js"></script>
+  <script src="js/levels/text.js"></script>
+  <script src="js/levels/balloon.js"></script>
+  <script src="js/levels/lock.js"></script>
+  <!-- 路線、終點慶祝與主流程 -->
+  <script src="js/route.js"></script>
+  <script src="js/celebrate.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
